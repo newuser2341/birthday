@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Aiman 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #222;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    .card {
+      background: #fff9f9;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
+      width: 90%;
+      max-width: 600px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #e91e63;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    #message {
+      font-size: 1.2rem;
+      margin: 1.2rem 0;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      background: #e91e63;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #d81b60;
+      transform: scale(1.05);
+    }
+
+    #quoteBox {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #ffeef5;
+      border-left: 6px solid #e91e63;
+      border-radius: 10px;
+      font-style: italic;
+      color: #c2185b;
+      font-size: 1.1rem;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 60px;
+      background-color: red;
+      border-radius: 50% 50% 50% 50%;
+      animation: float 10s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-120vh); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    #modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      z-index: 10;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Happy Birthday Aiman 🎂</h1>
+    <div id="message">Wishing you a magical birthday filled with love, surprises, and unforgettable joy! 💖</div>
+    <div id="quoteBox">✨ "Count your life by smiles, not tears. Count your age by friends, not years." ✨</div>
+    <button onclick="generateQuote()">💬 New Quote</button>
+    <button onclick="launchConfetti()">🎊 Celebrate</button>
+    <button onclick="toggleMusic()">🎵 Play Music</button>
+    <button onclick="showModal()">💌 Special Message</button>
+    <div id="countdown"></div>
+  </div>
+
+  <div id="modal">
+    <p>Dear Aiman, your presence brings light to everyone around you. Wishing you the happiest birthday and a year full of blessings! 🎁</p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+
+  <audio id="music" loop src="https://cdn.pixabay.com/download/audio/2022/03/16/audio_d48a8c713e.mp3?filename=happy-birthday-to-you-piano-version-121459.mp3"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const quotes = [
+      "Another year older, wiser, and more fabulous!",
+      "Birthdays are nature's way of telling us to eat more cake!",
+      "May your birthday be filled with laughter and joy!",
+      "Today is your day. Live it to the fullest!",
+      "Celebrate the gift of life, and the blessing that you are!"
+    ];
+
+    function generateQuote() {
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quoteBox").innerText = `✨ "${quote}" ✨`;
+    }
+
+    function launchConfetti() {
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 },
+        colors: ['#e91e63', '#f8bbd0', '#fff176', '#81d4fa']
+      });
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("music");
+      music.paused ? music.play() : music.pause();
+    }
+
+    function showModal() {
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 10000);
+    }
+    setInterval(createBalloon, 800);
+
+    const birthday = new Date("2025-05-14");
+    const countdownEl = document.getElementById("countdown");
+    function updateCountdown() {
+      const now = new Date();
+      const next = new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate());
+      if (now > next) next.setFullYear(now.getFullYear() + 1);
+      const diff = next - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      countdownEl.innerText = `🎂 ${days} day(s) left until Aiman's next birthday!`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("music").play().catch(() => {});
+        launchConfetti();
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
